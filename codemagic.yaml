@@ -1,0 +1,14 @@
+workflows:
+  android-release:
+    name: Animora Android Release
+    max_build_duration: 30
+    environment:
+      vars:
+        PACKAGE_NAME: com.clevercreations.animora
+    scripts:
+      - name: Build release APK
+        script: |
+          chmod +x gradlew || true
+          ./gradlew assembleRelease
+    artifacts:
+      - app/build/outputs/apk/release/app-release.apk
