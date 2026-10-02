@@ -6,7 +6,7 @@ workflows:
     environment:
       vars:
         PACKAGE_NAME: "com.clevercreations.animora"
-        JAVA_HOME: "/usr/lib/jvm/java-17.0.0-openjdk-amd64"
+        JAVA_HOME: "/usr/lib/jvm/java-1.17.0-openjdk-amd64"
         GRADLE_HOME: "/home/builder/programs/gradle-8.11.1"
       java: 17
     triggering:
