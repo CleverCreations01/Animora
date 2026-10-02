@@ -2,13 +2,11 @@ workflows:
   android-release:
     name: Animora Android Release
     max_build_duration: 30
-    instance_type: linux_x2
+    instance_type: mac_mini_m2
+
     environment:
-      vars:
-        PACKAGE_NAME: "com.clevercreations.animora"
-        JAVA_HOME: "/usr/lib/jvm/java-1.17.0-openjdk-amd64"
-        GRADLE_HOME: "/home/builder/programs/gradle-8.11.1"
       java: 17
+
     triggering:
       events:
         - push
@@ -16,16 +14,20 @@ workflows:
         - pattern: main
           include: true
           source: true
+
     scripts:
       - name: Set Android SDK location
         script: |
           echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/local.properties"
+
       - name: Verify build tools
         script: |
           java -version
-          "$GRADLE_HOME/bin/gradle" --version
-      - name: Build installable release APK
+          "/Users/builder/programs/gradle-8.14.1/bin/gradle" --version
+
+      - name: Build release APK
         script: |
-          "$GRADLE_HOME/bin/gradle" clean assembleRelease --no-daemon
+          "/Users/builder/programs/gradle-8.14.1/bin/gradle" clean assembleRelease --no-daemon
+
     artifacts:
       - app/build/outputs/apk/release/app-release.apk
